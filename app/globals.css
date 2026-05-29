@@ -1,0 +1,61 @@
+/* ══════════════════════════════════════════
+   globals.css — Estilos globais
+   ══════════════════════════════════════════ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0A090D;
+  --surface: #131219;
+  --border: #2D2C3A;
+  --accent: #D4A853;
+  --text: #EDE9E0;
+  --muted: #8D8899;
+  --dim: #5C5768;
+  --success: #5CB87A;
+  --error: #E05252;
+  --warning: #E0A830;
+  --info: #6B9FE8;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  margin: 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+input::placeholder { color: var(--dim); }
+select { appearance: none; -webkit-appearance: none; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideR {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 40px rgba(212, 168, 83, 0.08); }
+  50% { box-shadow: 0 0 60px rgba(212, 168, 83, 0.18); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-fadeUp { animation: fadeUp 0.4s ease; }
+.animate-slideR { animation: slideR 0.3s ease; }
+.animate-glow { animation: glow 3s ease-in-out infinite; }
+.animate-float { animation: float 4s ease-in-out infinite; }

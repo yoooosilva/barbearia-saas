@@ -56,9 +56,10 @@ export default function HomePage() {
       </div>
 
       {/* Pricing */}
-      <div className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-light text-center mb-12" style={{ fontFamily: "'Playfair Display', serif" }}>Planos</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+      <div className="max-w-3xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-light text-center mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Planos</h2>
+        <p className="text-center text-sm mb-12" style={{ color: 'var(--muted)' }}>Comece grátis, faça upgrade quando precisar</p>
+        <div className="grid md:grid-cols-2 gap-6">
           {Object.entries(PLANS).map(([key, plan]) => (
             <div key={key} className="rounded-xl p-6 border relative" style={{
               background: key === 'pro' ? 'var(--accent)' : 'var(--surface)',
@@ -68,12 +69,12 @@ export default function HomePage() {
               {key === 'pro' && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
                   style={{ background: 'var(--bg)', color: 'var(--accent)' }}>
-                  Popular
+                  Recomendado
                 </div>
               )}
               <h3 className="text-lg font-medium mb-1">{plan.name}</h3>
               <div className="text-3xl font-light mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {CUR}{plan.price}<span className="text-sm font-normal">/mês</span>
+                {plan.price === 0 ? 'Grátis' : <>{CUR}{plan.price}<span className="text-sm font-normal">/mês</span></>}
               </div>
               <ul className="space-y-2 mb-6">
                 {plan.features.map((f, i) => (
@@ -87,7 +88,7 @@ export default function HomePage() {
                   background: key === 'pro' ? 'var(--bg)' : 'var(--accent)',
                   color: key === 'pro' ? 'var(--accent)' : 'var(--bg)',
                 }}>
-                Começar
+                {key === 'basic' ? 'Começar Grátis' : 'Ativar Pro'}
               </Link>
             </div>
           ))}

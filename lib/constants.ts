@@ -48,9 +48,32 @@ export const STATUS_LABELS: Record<string, string> = {
 }
 
 export const PLANS = {
-  basic: { name: 'Básico', price: 19, features: ['1 profissional', '100 marcações/mês', 'Email'] },
-  pro: { name: 'Pro', price: 39, features: ['5 profissionais', 'Marcações ilimitadas', 'Email + WhatsApp', 'Relatórios PDF'] },
-  enterprise: { name: 'Enterprise', price: 79, features: ['Profissionais ilimitados', 'Tudo ilimitado', 'API', 'Marca branca', 'Suporte prioritário'] },
+  basic: {
+    name: 'Básico',
+    price: 0,
+    label: 'Grátis',
+    features: [
+      '1 profissional',
+      'Marcações ilimitadas',
+      '50 emails/dia',
+      'Link público de booking',
+      'Dashboard (hoje + agenda)',
+    ],
+  },
+  pro: {
+    name: 'Pro',
+    price: 19,
+    label: '€19/mês',
+    features: [
+      'Profissionais ilimitados',
+      'Marcações ilimitadas',
+      'Emails ilimitados',
+      'WhatsApp notificações',
+      'Relatórios PDF',
+      'Página personalizada',
+      'Suporte prioritário',
+    ],
+  },
 }
 
 // ─── Time helpers ───

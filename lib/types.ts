@@ -2,7 +2,7 @@
 // lib/types.ts — Tipos TypeScript (espelho do schema SQL)
 // ══════════════════════════════════════════
 
-export type SubscriptionPlan = 'trial' | 'basic' | 'pro' | 'enterprise'
+export type SubscriptionPlan = 'trial' | 'basic' | 'pro'
 export type SubscriptionStatus = 'active' | 'trial' | 'past_due' | 'cancelled' | 'expired'
 export type AppointmentStatus = 'pendente' | 'confirmado' | 'concluído' | 'cancelado' | 'faltou'
 export type AppointmentSource = 'cliente' | 'dono'

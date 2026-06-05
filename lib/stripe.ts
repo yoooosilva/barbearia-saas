@@ -8,11 +8,9 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-06-20',
 })
 
-// Mapeamento plano → preço Stripe
+// Mapeamento plano → preço Stripe (apenas Pro, Basic é grátis)
 const PLAN_PRICES: Record<string, string> = {
-  basic: process.env.STRIPE_PRICE_BASIC!,
   pro: process.env.STRIPE_PRICE_PRO!,
-  enterprise: process.env.STRIPE_PRICE_ENTERPRISE!,
 }
 
 // Criar sessão de Checkout (redirect para Stripe)

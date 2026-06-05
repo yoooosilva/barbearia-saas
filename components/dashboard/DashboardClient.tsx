@@ -111,17 +111,24 @@ export default function DashboardClient({ salon: initSalon, staff: initStaff, se
 
       <div className="max-w-[860px] mx-auto px-3 py-3 pb-20">
         {/* Plan banner */}
+        {salon.plan === 'basic' && (
+          <div className="rounded-lg p-3 mb-3 flex justify-between items-center text-xs"
+            style={{ background: `${T.accent}08`, border: `1px solid ${T.accent}25`, color: T.accent }}>
+            <span>✨ Plano Básico (grátis) — 1 profissional, 50 emails/dia</span>
+            <button className="px-3 py-1 rounded-md font-semibold" style={{ background: T.accent, color: T.bg }}>Upgrade Pro €19/mês</button>
+          </div>
+        )}
         {salon.plan_status === 'trial' && (
           <div className="rounded-lg p-3 mb-3 flex justify-between items-center text-xs"
             style={{ background: `${T.warning}10`, border: `1px solid ${T.warning}30`, color: T.warning }}>
-            <span>⏱ Trial expira em {Math.max(0, Math.ceil((new Date(salon.trial_ends_at).getTime() - Date.now()) / 86400000))} dias</span>
-            <button className="px-3 py-1 rounded-md font-semibold" style={{ background: T.accent, color: T.bg }}>Ativar plano</button>
+            <span>⏱ Trial Pro expira em {Math.max(0, Math.ceil((new Date(salon.trial_ends_at).getTime() - Date.now()) / 86400000))} dias</span>
+            <button className="px-3 py-1 rounded-md font-semibold" style={{ background: T.accent, color: T.bg }}>Ativar Pro €19/mês</button>
           </div>
         )}
         {salon.plan_status === 'expired' && (
           <div className="rounded-lg p-3 mb-3 text-xs text-center"
             style={{ background: `${T.error}10`, border: `1px solid ${T.error}30`, color: T.error }}>
-            ⚠ O seu trial expirou. Ative um plano para continuar a receber marcações.
+            ⚠ O seu trial expirou. Ative o plano Pro ou continue com o Básico (grátis).
           </div>
         )}
 

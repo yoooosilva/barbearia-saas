@@ -41,8 +41,28 @@ export async function POST(request: NextRequest) {
 
     const owner = (salon as Record<string, unknown>).owner as { email: string; phone: string } | null
 
+    // ✅ Verificar quota de emails para plano Basic
+    const { data: quotaData } = await supabase.rpc('check_daily_email_quota', { p_salon_id: salon.id })
+    const quota = quotaData as { can_send: boolean; used: number; limit: number } | null
+
+    if (quota && !quota.can_send && salon.plan === 'basic') {
+      // Registar notificação como falhada (quota atingida)
+      await supabase.from('notifications').insert({
+        salon_id: salon.id,
+        appointment_id: appt.id,
+        type: 'new_booking',
+        channel: 'email',
+        recipient: owner?.email || salon.email,
+        subject: `[QUOTA] Nova marcação — ${appt.client_name}`,
+        body: `Limite de 50 emails/dia atingido. Upgrade para Pro para receber notificações ilimitadas.`,
+        error: 'DAILY_EMAIL_QUOTA_EXCEEDED',
+        created_at: new Date().toISOString(),
+      })
+      return NextResponse.json({ warning: 'Email quota exceeded for Basic plan' }, { status: 200 })
+    }
+
     // Enviar notificação
-    await notifyNewBooking({
+    const notifSent = await notifyNewBooking({
       ownerEmail: owner?.email || salon.email,
       ownerPhone: owner?.phone || salon.phone,
       salonName: salon.name,
@@ -52,6 +72,11 @@ export async function POST(request: NextRequest) {
       date: appt.date,
       time: appt.start_time,
     })
+
+    // ✅ Incrementar contador se email foi enviado
+    if (notifSent) {
+      await supabase.rpc('increment_email_count', { p_salon_id: salon.id })
+    }
 
     // Registar notificação na BD
     await supabase.from('notifications').insert({

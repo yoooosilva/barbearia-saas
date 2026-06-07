@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
           await supabase.from('salons').update({
             stripe_customer_id: customerId,
             stripe_subscription_id: subscriptionId,
-            plan: plan as 'basic' | 'pro' | 'enterprise',
+            plan: plan as 'basic' | 'pro',
             plan_status: 'active',
             is_active: true,
           }).eq('id', salonId)

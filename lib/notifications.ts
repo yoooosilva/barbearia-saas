@@ -91,9 +91,9 @@ export async function notifyNewBooking(params: {
   staffName: string
   date: string
   time: string
-}) {
+}): Promise<boolean> {
   // Email ao dono
-  await sendBookingEmail({
+  const emailSent = await sendBookingEmail({
     to: params.ownerEmail,
     salonName: params.salonName,
     clientName: params.clientName,
@@ -111,4 +111,6 @@ export async function notifyNewBooking(params: {
       `✂️ *Nova marcação*\n${params.clientName}\n${params.serviceName}\n📅 ${params.date} às ${params.time}\nCom ${params.staffName}`
     )
   }
+
+  return emailSent
 }

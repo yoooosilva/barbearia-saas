@@ -9,8 +9,9 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 
 // Mapeamento plano → preço Stripe (apenas Pro, Basic é grátis)
+// Price ID live: Barbearia SaaS Pro — €19/mês
 const PLAN_PRICES: Record<string, string> = {
-  pro: process.env.STRIPE_PRICE_PRO!,
+  pro: process.env.STRIPE_PRICE_PRO || 'price_1TcG11DBLiWzZP08Xg6rJwhq',
 }
 
 // Criar sessão de Checkout (redirect para Stripe)
